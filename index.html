@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0c9b5d" />
+  <title>Resolve Aí — Protótipo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="ghost" id="backBtn" aria-label="Voltar">←</button>
+      <div class="brand" onclick="go('home')" role="button" tabindex="0">
+        <div class="brand-pin">◉</div>
+        <div><strong>Resolve <span>Aí</span></strong><small>Seu tempo vale mais.</small></div>
+      </div>
+      <button class="ghost" id="adminBtn">Admin</button>
+    </header>
+
+    <main id="app"></main>
+
+    <nav class="bottom-nav" id="bottomNav">
+      <button data-go="home">⌂<span>Início</span></button>
+      <button data-go="services">✓<span>Serviços</span></button>
+      <button data-go="orders">▣<span>Pedidos</span></button>
+      <button data-go="profile">◯<span>Perfil</span></button>
+    </nav>
+  </div>
+
+  <template id="home">
+    <section class="screen hero-screen">
+      <div class="hero-card">
+        <div class="hero-icon">⏱</div>
+        <h1>Resolve <span>Aí</span></h1>
+        <p class="tagline">Seu tempo vale mais.</p>
+        <p>Conectando você a pessoas que resolvem.</p>
+        <button class="primary" data-go="login">Começar</button>
+        <button class="secondary" data-go="login">Já tenho uma conta</button>
+      </div>
+      <div class="illustration">
+        <div class="city"></div><div class="person">📱</div>
+      </div>
+      <div class="mini-callout"><strong>Tarefas do dia a dia?</strong><br>A gente resolve.</div>
+    </section>
+  </template>
+
+  <template id="login">
+    <section class="screen">
+      <h2>Bem-vindo(a)!</h2>
+      <p class="muted">Acesse sua conta ou crie uma nova.</p>
+      <div class="tabs"><button class="active">Login</button><button>Cadastro</button></div>
+      <label>E-mail<input type="email" placeholder="voce@email.com" value="aluno@resolveai.com"></label>
+      <label>Senha<input type="password" placeholder="••••••••" value="123456"></label>
+      <button class="primary" data-go="services">Entrar</button>
+      <div class="divider">ou continue com</div>
+      <button class="secondary">Entrar com Google</button>
+      <button class="secondary">Entrar com Apple</button>
+      <p class="center muted">Ainda não tem conta? <b>Cadastre-se</b></p>
+    </section>
+  </template>
+
+  <template id="services">
+    <section class="screen">
+      <h2>O que você precisa resolver?</h2>
+      <input class="search" placeholder="Buscar um serviço...">
+      <div class="service-grid">
+        <button data-service="Entrega">🚚<span>Entregas</span></button>
+        <button data-service="Retirar documento">📄<span>Retirar documento</span></button>
+        <button data-service="Ir à loja">🛒<span>Ir à loja</span></button>
+        <button data-service="Acompanhar serviço">🛠️<span>Acompanhar serviço</span></button>
+        <button data-service="Fila e burocracia">🏛️<span>Fila e burocracia</span></button>
+        <button data-service="Outros">🔗<span>Outros</span></button>
+      </div>
+      <button class="info-card" data-go="describe"><span><strong>Não encontrou?</strong><small>Descreva sua necessidade</small></span><b>›</b></button>
+    </section>
+  </template>
+
+  <template id="describe">
+    <section class="screen">
+      <h2>Descreva sua tarefa</h2>
+      <p class="muted">Conte em detalhes o que precisa. Quanto mais informação, melhor!</p>
+      <textarea id="descInput" maxlength="500" placeholder="Ex.: Preciso que alguém pegue um documento na empresa X e leve até o endereço Y."></textarea>
+      <div class="row between"><span class="muted">Adicionar fotos (opcional)</span><span class="muted" id="count">0/500</span></div>
+      <button class="upload">＋<span>Adicionar foto</span></button>
+      <button class="primary" data-go="location">Continuar</button>
+    </section>
+  </template>
+
+  <template id="location">
+    <section class="screen">
+      <h2>Informe os endereços</h2>
+      <div class="map-card">
+        <div class="map-grid"></div>
+        <div class="pin p1">●</div><div class="pin p2">●</div><div class="route"></div>
+      </div>
+      <label>Local de retirada<input id="pickup" value="SRTVN 701, Asa Norte - Brasília - DF"></label>
+      <label>Local de entrega<input id="dropoff" value="SHS Quadra 06, Asa Sul - Brasília - DF"></label>
+      <button class="secondary">📍 Usar minha localização</button>
+      <button class="primary" data-go="quote">Continuar</button>
+    </section>
+  </template>
+
+  <template id="quote">
+    <section class="screen">
+      <h2>Estimativa de preço</h2>
+      <div class="price-card"><div class="money">$</div><span>Preço estimado</span><strong>R$ 25,00 – 40,00</strong><small>O valor final pode variar de acordo com a distância e a complexidade da tarefa.</small></div>
+      <h3>Resumo da tarefa</h3>
+      <ul class="summary-list">
+        <li>📄 <span id="summaryService">Retirar documento</span></li>
+        <li>📍 <span id="summaryPickup">SRTVN 701, Asa Norte</span></li>
+        <li>📍 <span id="summaryDropoff">SHS Quadra 06, Asa Sul</span></li>
+        <li>⏱ Urgência: Normal</li>
+      </ul>
+      <button class="primary" data-go="searching">Solicitar agora</button>
+    </section>
+  </template>
+
+  <template id="searching">
+    <section class="screen center-screen">
+      <h2>Buscando um Resolvedor</h2>
+      <div class="radar"><div class="pulse"></div><div class="avatar">👤</div></div>
+      <p>Estamos encontrando o melhor Resolvedor para você...</p>
+      <p class="muted">Isso pode levar alguns minutos.</p>
+      <button class="secondary" data-go="services">Cancelar solicitação</button>
+      <div class="tip">💲 <span><b>Dica:</b><br>Você será notificado assim que alguém aceitar sua tarefa.</span></div>
+      <button class="primary" data-go="tracking">Simular aceite do Resolvedor</button>
+    </section>
+  </template>
+
+  <template id="tracking">
+    <section class="screen">
+      <h2>Resolvedor a caminho</h2>
+      <div class="resolver-card"><div class="resolver-avatar">👨🏽</div><div><strong>Carlos Silva</strong><p>⭐ 4,8 <small>(120 avaliações)</small></p><span class="chip">🏍 Moto</span> <span class="chip">3 min de distância</span></div></div>
+      <div class="steps"><span class="done">Aceito</span><span class="done">A caminho</span><span>Em execução</span><span>Concluído</span></div>
+      <div class="map-card tall"><div class="map-grid"></div><div class="pin p1">●</div><div class="pin p2">🏍</div><div class="route"></div><div class="eta">Chega em <b>3 min</b></div></div>
+      <div class="row gap"><button class="secondary grow">💬 Chat</button><button class="secondary grow">📞 Ligar</button></div>
+      <button class="primary" data-go="done">Simular conclusão</button>
+    </section>
+  </template>
+
+  <template id="done">
+    <section class="screen center-screen">
+      <div class="success">✓</div>
+      <h2>Serviço concluído!</h2>
+      <p class="muted">Sua tarefa foi realizada com sucesso.</p>
+      <div class="info-card static"><span><strong>📄 Documento entregue</strong><small>O Resolvedor enviou a confirmação da entrega.</small></span></div>
+      <button class="secondary">Ver comprovante</button>
+      <button class="primary" data-go="review">Avaliar serviço</button>
+      <button class="link" data-go="home">Voltar para o início</button>
+    </section>
+  </template>
+
+  <template id="review">
+    <section class="screen center-screen">
+      <h2>Como foi o serviço?</h2>
+      <div class="resolver-avatar big">👨🏽</div>
+      <h3>Carlos Silva</h3>
+      <div class="stars" id="stars"><button>★</button><button>★</button><button>★</button><button>★</button><button>★</button></div>
+      <textarea placeholder="Conte um pouco sobre sua experiência (opcional)"></textarea>
+      <button class="primary" data-go="home">Enviar avaliação</button>
+    </section>
+  </template>
+
+  <template id="orders">
+    <section class="screen">
+      <h2>Meus pedidos</h2>
+      <div class="order-card"><span class="status ok">Concluído</span><strong>Retirar documento</strong><small>Hoje • Carlos Silva</small></div>
+      <div class="order-card"><span class="status wait">Em andamento</span><strong>Entrega rápida</strong><small>Hoje • Marina Lopes</small></div>
+      <div class="order-card"><span class="status">Agendado</span><strong>Acompanhar serviço</strong><small>Amanhã • 14:00</small></div>
+    </section>
+  </template>
+
+  <template id="profile">
+    <section class="screen profile-screen">
+      <div class="profile-head"><div class="profile-avatar">👩🏻</div><h2>Ana Souza</h2><p>ana@email.com</p></div>
+      <div class="menu-list">
+        <button>▣ Meus pedidos <span>›</span></button><button>📍 Endereços <span>›</span></button><button>💳 Formas de pagamento <span>›</span></button><button>🔔 Notificações <span>›</span></button><button>❓ Ajuda <span>›</span></button><button data-go="home">↪ Sair <span>›</span></button>
+      </div>
+    </section>
+  </template>
+
+  <template id="admin">
+    <section class="admin-screen">
+      <aside class="admin-side">
+        <h3>◉ Resolve <span>Aí</span></h3>
+        <button class="active">▦ Dashboard</button><button>👥 Usuários</button><button>▣ Serviços</button><button>🧑‍🔧 Resolvedores</button><button>★ Avaliações</button><button>💰 Financeiro</button><button>⚠ Ocorrências</button><button>⚙ Configurações</button>
+      </aside>
+      <div class="admin-main">
+        <h2>Painel Administrativo</h2><h3>Visão Geral</h3>
+        <div class="stats"><div><span>Usuários</span><strong>320</strong><small>+12%</small></div><div><span>Serviços</span><strong>150</strong><small>+8%</small></div><div><span>Resolvidos</span><strong>128</strong><small>85%</small></div></div>
+        <div class="chart-card"><h3>Serviços nos últimos 7 dias</h3><div class="bars"><i style="height:35%"></i><i style="height:50%"></i><i style="height:72%"></i><i style="height:45%"></i><i style="height:60%"></i><i style="height:52%"></i><i style="height:88%"></i></div><div class="days"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div></div>
+        <div class="table-card"><h3>Serviços recentes</h3><table><tr><th>ID</th><th>Cliente</th><th>Serviço</th><th>Status</th></tr><tr><td>#0123</td><td>Ana Souza</td><td>Retirar documento</td><td>Concluído</td></tr><tr><td>#0122</td><td>João Lima</td><td>Entrega</td><td>Em andamento</td></tr><tr><td>#0121</td><td>Mariana Costa</td><td>Ir à loja</td><td>Concluído</td></tr></table></div>
+      </div>
+    </section>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

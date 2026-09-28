@@ -1,0 +1,154 @@
+@media (min-width: 640px) {
+  .app-shell {
+    width: min(760px, 96vw);
+  }
+
+  .screen {
+    width: min(620px, 100%);
+    margin-inline: auto;
+    padding-inline: 28px;
+  }
+
+  .bottom-nav {
+    width: min(760px, 96vw);
+  }
+
+  .bottom-nav span {
+    font-size: 11px;
+  }
+
+  .admin-side {
+    width: 190px;
+    flex: 0 0 190px;
+    padding: 22px 14px;
+  }
+
+  .admin-side button {
+    font-size: 12px;
+  }
+
+  .admin-main {
+    min-width: 0;
+    padding: 26px;
+  }
+
+  .table-card {
+    overflow-x: auto;
+  }
+
+  .table-card table {
+    min-width: 480px;
+    font-size: 12px;
+  }
+
+  .table-card th,
+  .table-card td {
+    padding: 9px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-shell,
+  .app-shell:has(.admin-screen) {
+    width: min(1080px, 96vw);
+  }
+
+  .topbar {
+    padding-inline: 28px;
+  }
+
+  .screen {
+    width: min(760px, 100%);
+    padding-top: 36px;
+  }
+
+  .hero-screen {
+    padding-top: 56px;
+  }
+
+  .bottom-nav {
+    width: min(1080px, 96vw);
+  }
+
+  .admin-side {
+    width: 220px;
+    flex-basis: 220px;
+    padding: 26px 18px;
+  }
+
+  .admin-main {
+    padding: 32px;
+  }
+
+  .stats {
+    gap: 14px;
+  }
+
+  .stats div,
+  .chart-card,
+  .table-card {
+    padding: 18px;
+  }
+
+  .stats span,
+  .stats small {
+    font-size: 12px;
+  }
+
+  .stats strong {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 639px) {
+  .illustration,
+  .profile-head {
+    margin-inline: -15px;
+  }
+
+  .app-shell:has(.admin-screen) {
+    width: 100%;
+  }
+
+  .admin-screen {
+    flex-direction: column;
+  }
+
+  .admin-side {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .admin-side h3 {
+    flex: 0 0 auto;
+    margin: 0 8px 0 0;
+  }
+
+  .admin-side button {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .admin-main {
+    min-width: 0;
+    padding: 16px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .table-card {
+    overflow-x: auto;
+  }
+
+  .table-card table {
+    min-width: 480px;
+  }
+}

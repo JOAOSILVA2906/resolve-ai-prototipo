@@ -19,16 +19,27 @@
         <div class="brand-pin">◉</div>
         <div><strong>Resolve <span>Aí</span></strong><small>Seu tempo vale mais.</small></div>
       </div>
-      <button class="ghost" id="adminBtn">Admin</button>
+      <div class="header-actions">
+        <button id="adminBtn" class="admin-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6z"/><path d="m8 12 3 3 5-6"/></svg>Admin</button>
+        <div class="account-control">
+          <button class="account-button" id="accountBtn" aria-label="Abrir opções da conta" aria-expanded="false" aria-controls="accountMenu"><span class="account-photo">AS<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=faces" alt="" onerror="this.hidden=true"></span></button>
+          <div class="account-menu" id="accountMenu" hidden>
+            <div class="account-summary"><strong>Ana Souza</strong><small>ana@email.com</small></div>
+            <button data-go="profile">Ver perfil <span aria-hidden="true">↗</span></button>
+            <button data-go="orders">Meus pedidos <span aria-hidden="true">›</span></button>
+            <button data-go="settings">Configurações <span aria-hidden="true">›</span></button>
+            <button data-go="home" class="account-exit">Voltar ao início <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+      </div>
     </header>
 
     <main id="app"></main>
 
-    <nav class="bottom-nav" id="bottomNav">
-      <button data-go="home">⌂<span>Início</span></button>
-      <button data-go="services">✓<span>Serviços</span></button>
-      <button data-go="orders">▣<span>Pedidos</span></button>
-      <button data-go="profile">◯<span>Perfil</span></button>
+    <nav class="bottom-nav" id="bottomNav" aria-label="Navegação principal">
+      <button data-go="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>Início</span></button>
+      <button data-go="services"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span>Serviços</span></button>
+      <button data-go="orders"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H5v16h14V5h-3M9 3h6v4H9zM8 12h8M8 16h5"/></svg><span>Pedidos</span></button>
     </nav>
   </div>
 
@@ -41,9 +52,6 @@
         <p>Conectando você a pessoas que resolvem.</p>
         <button class="primary" data-go="login">Começar</button>
         <button class="secondary" data-go="login">Já tenho uma conta</button>
-      </div>
-      <div class="illustration">
-        <div class="city"></div><div class="person">📱</div>
       </div>
       <div class="mini-callout"><strong>Tarefas do dia a dia?</strong><br>A gente resolve.</div>
     </section>
@@ -65,16 +73,36 @@
   </template>
 
   <template id="services">
-    <section class="screen">
+    <section class="screen services-screen">
+      <div class="services-eyebrow">MAIS TEMPO PARA VOCÊ</div>
       <h2>O que você precisa resolver?</h2>
-      <input class="search" placeholder="Buscar um serviço...">
+      <p class="services-intro">Escolha uma tarefa e deixe o resto com um Resolvedor.</p>
+      <input class="search" aria-label="Buscar um serviço" placeholder="Buscar um serviço...">
       <div class="service-grid">
-        <button data-service="Entrega">🚚<span>Entregas</span></button>
-        <button data-service="Retirar documento">📄<span>Retirar documento</span></button>
-        <button data-service="Ir à loja">🛒<span>Ir à loja</span></button>
-        <button data-service="Acompanhar serviço">🛠️<span>Acompanhar serviço</span></button>
-        <button data-service="Fila e burocracia">🏛️<span>Fila e burocracia</span></button>
-        <button data-service="Outros">🔗<span>Outros</span></button>
+        <button data-service="Entrega" class="service-card tone-green">
+          <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h11v11H3zM14 10h4l3 4v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+          <span class="service-title">Entregas</span><small>Envie ou receba encomendas sem sair de onde está.</small><span class="service-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button data-service="Retirar documento" class="service-card tone-blue">
+          <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h6"/></svg></span>
+          <span class="service-title">Retirar documento</span><small>Busque documentos em empresas, cartórios e outros locais.</small><span class="service-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button data-service="Ir à loja" class="service-card tone-amber">
+          <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l1 13H4zM9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+          <span class="service-title">Ir à loja</span><small>Delegue compras, trocas ou a retirada de um produto.</small><span class="service-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button data-service="Acompanhar serviço" class="service-card tone-purple">
+          <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5H5v16h14V5h-4M9 3h6v4H9zM8 14l3 3 5-6"/></svg></span>
+          <span class="service-title">Acompanhar serviço</span><small>Tenha alguém presente em visitas técnicas e manutenções.</small><span class="service-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button data-service="Fila e burocracia" class="service-card tone-blue">
+          <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 8 9-5 9 5H3zM5 11v7M10 11v7M14 11v7M19 11v7M3 21h18"/></svg></span>
+          <span class="service-title">Fila e burocracia</span><small>Conte com ajuda em filas e demandas do dia a dia.</small><span class="service-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button data-service="Outros" class="service-card tone-green">
+          <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><path d="M17.5 14v7M14 17.5h7"/></svg></span>
+          <span class="service-title">Outros</span><small>Precisa de algo diferente? Conte o que podemos resolver.</small><span class="service-arrow" aria-hidden="true">↗</span>
+        </button>
       </div>
       <button class="info-card" data-go="describe"><span><strong>Não encontrou?</strong><small>Descreva sua necessidade</small></span><b>›</b></button>
     </section>
@@ -104,6 +132,7 @@
       <button class="primary" data-go="quote">Continuar</button>
     </section>
   </template>
+  
 
   <template id="quote">
     <section class="screen">
@@ -172,6 +201,16 @@
       <div class="order-card"><span class="status ok">Concluído</span><strong>Retirar documento</strong><small>Hoje • Carlos Silva</small></div>
       <div class="order-card"><span class="status wait">Em andamento</span><strong>Entrega rápida</strong><small>Hoje • Marina Lopes</small></div>
       <div class="order-card"><span class="status">Agendado</span><strong>Acompanhar serviço</strong><small>Amanhã • 14:00</small></div>
+    </section>
+  </template>
+
+  <template id="settings">
+    <section class="screen settings-screen">
+      <div class="services-eyebrow">SUA CONTA</div>
+      <h2>Configurações</h2>
+      <p class="muted">Personalize sua experiência neste navegador.</p>
+      <label class="preference-row"><span><strong>Reduzir animações</strong><small>Use transições mais discretas ao navegar.</small></span><input type="checkbox" id="reduceMotion"></label>
+      <button class="secondary" data-go="profile">Ver meu perfil</button>
     </section>
   </template>
 
